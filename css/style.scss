@@ -1,0 +1,176 @@
+// styles.scss
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body{
+  margin:0;
+  padding:0;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:14px;
+  line-height:20px;
+  background: #e6ecf0;
+
+  .fLft{float:left;}
+
+  .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+ .mainContent{margin:0 auto;width:100%;position:relative;}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+th, td {
+  padding: .625em;
+  text-align: center;
+}
+th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+} 
+a.button {
+  font-size: 1em;
+  padding: 6px 10px;
+  border: 2px solid #00796B;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  color:#000;
+  display: inline-block;
+  &.btn1{position:absolute;right:100px;top:5px;}
+  &:hover{
+  background: #00796B;
+    color: #fff;
+        }
+}
+ .overlay  {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: visible;
+  opacity: 1;
+ 
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 40%;
+  position: relative;
+  transition: all 5s ease-in-out;
+  h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.content {
+  max-height: 30%;
+  overflow: auto;
+  div.contentMain{margin:10px;width:80%;}
+  ._720kb-datepicker-calendar{display:none;width:80%;}
+  ._720kb-datepicker-open{top:33px;right:0;display:block;}
+}
+.close {
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  cursor:pointer;
+  &:hover {
+  color: #00897B;
+   }
+}
+ input, select{width:61%;height:50px;line-height:50px;border:2px solid #00897B;padding:0 10px;}
+ .dateInput{width:81%;}
+ select{width:100px;}
+ .label{font-size:14px;line-height:50px;width:80px;display:inline-block}
+ datepicker, .datepicker{float:none;}
+.btnDv{text-align:right;}
+.errorMsg{color:#E53935;display:inline-block;margin:0 5px;}
+}
+}
+
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+    caption {
+    font-size: 1.3em;
+  }
+  thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  td:before {
+    /* aria-label has no advantage, it won't be read inside a table    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  td:last-child {
+    border-bottom: 0;
+  }
+  }
+}
+
+
+  @media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+
+

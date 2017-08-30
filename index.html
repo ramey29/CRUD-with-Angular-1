@@ -1,0 +1,94 @@
+<!doctype html>
+<html data-ng-app="Project1">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="RB">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" >
+        
+        <!-- build:css css/style.min.css -->
+        <link href="css/angular-datepicker.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" type="text/css" rel="stylesheet"/>
+        
+        
+        <!-- endbuild-->
+    </head>
+    <body ng-app="angAppX" >
+        <div ng-controller="joinCrew">
+        <div class="mainContent clearfix">
+            <div>{{globalErrorMessage}}</div>
+           <div >
+                <a class="button btn1" data-ng-click="addModel()">Add New Transaction</a>
+                    <table >
+                        <caption>All Transactions</caption>
+                        
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th style="text-align:right">Amount</th>
+                                <th >Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                       <tbody>
+                            <tr ng-repeat="list in allTransaction" >
+                                <td>{{ list.id }}</td>
+                                <td>{{ list.user }}</td>
+                                <td style="text-align:right">{{ list.currency }} {{ list.amount | number : 2 }}</td>
+                                <td>{{ list.txn_date | date : YYYY-MM-DD}}</td>
+                                <td>
+                                    <a class="button" data-ng-click="oneTransaction(list.id, list.user);">View Info</a>
+                                    <a class="button" data-ng-click="editTransaction(list.id, list.user)">Edit</a>
+                                    <a class="button" data-ng-click="deleteTransaction(list.id, list.user)">Delete</a>
+                                </td>
+                            </tr>
+                       </tbody>    
+                    </table>
+                
+                </div>
+        
+               
+        </div>
+           <div id="popup1" class="overlay" ng-if="modalOpen">
+            <div class="popup">
+                <h2 ng-if="openEdit">Edit Transaction {{id}}</h2>
+                <h2 ng-if="openAdd">Add Transaction</h2>
+                <h2 ng-if="openOne">View Transaction {{showInfo.id}}</h2>
+                <a class="close" data-ng-click="modalClose()">&times;</a>
+                <div class="content" ng-if="!openOne && (openEdit || openAdd) ">
+                   <div class="contentMain"><span class="label">User </span> {{ user }}</div>
+                   <div class="contentMain"><span class="label">Date</span>
+                    <datepicker date-format="y-MM-dd"> <input ng-model="date" class="dateInput" type="text"/></datepicker>
+                    <br><span class="errorMsg">{{errorMessage.txn_date}}</span>
+                   </div>
+                   <div class="contentMain"><span class="label">Amount</span>
+                    <select ng-model="currencyN" ng-options="x for x in currency"></select>                       
+                    <input type="text" ng-model="amount"/>
+                    <br><span class="errorMsg">{{errorMessage.currency}}</span><span class="errorMsg">{{errorMessage.amount}}</span>
+                   </div>
+                   <div class="btnDv">
+                       <a class="button" ng-if="openEdit" data-ng-click="updateTransaction(id, user, amount, currencyN, date);">Update</a>
+                       <a class="button" ng-if="openAdd" data-ng-click="createTransaction(user, amount, currencyN, date);">Save</a>
+                       <a class="button" data-ng-click="modalClose()">Cancel</a>
+                   </div>
+                </div>
+                <div class="content" ng-if="openOne">
+                   <div class="contentMain"><span class="label">User</span><span>{{showInfo.user}}</span></div>
+                   <div class="contentMain"><span class="label">Date</span><span>{{showInfo.txn_date | date : YYYY-MM-DD}}</span></div>
+                   <div class="contentMain"><span class="label">Amount</span><span>{{showInfo.currency }} </span><span> {{showInfo.amount | number : 2 }}</span></div>
+                   
+                </div>
+            </div>
+        </div> 
+                
+
+        </div>
+        <!-- build:js js/main.min.js -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" type="text/javascript"></script>
+         <script src="js/angular-datepicker.js"></script>
+        <script src="js/main.js" type="text/javascript"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+        
+        <!-- endbuild-->
+    </body>
+</html>
