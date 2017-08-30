@@ -150,3 +150,67 @@ myApp.controller('joinCrew',['$scope', 'joinCrewService', function($scope, joinC
   };
 
 }]);
+
+// directive for valid number to be put seperately in directive page
+
+myApp.directive('validNumber', function(){
+        return {
+           require: '?ngModel',
+            scope: {
+                preDecimalMaxLength: '=?'
+            },
+            link: function (scope, element, attrs, ngModelCtrl) {
+                if (!ngModelCtrl) {
+                    return;
+                }
+
+                ngModelCtrl.$parsers.push(function (val) {
+                    if (angular.isUndefined(val)) {
+                        val = '';
+                    }
+// negative and decimal check
+                    var clean = val.replace(/[^-0-9\.]/g, '');
+                    var negativeCheck = clean.split('-');
+                    var decimalCheck = clean.split('.');
+                    if (!angular.isUndefined(negativeCheck[1])) {
+                        negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+
+// to allow negative using attribute allow-negative=true
+
+                        clean = attrs.allowNegative ? negativeCheck[0] + '-' + negativeCheck[1]: negativeCheck[0] + '' + negativeCheck[1];
+                        decimalCheck = clean.split('.');
+                        if (negativeCheck[0].length > 0) {
+                           clean = negativeCheck[0];
+                        }
+                    }
+
+                    if (!angular.isUndefined(decimalCheck[1])) {
+                        if (!angular.isUndefined(scope.preDecimalMaxLength)) {
+                            decimalCheck[0] = decimalCheck[0].slice(0, scope.preDecimalMaxLength);
+                        }                     
+                        decimalCheck[1] = decimalCheck[1].slice(0, 2);
+                        clean = decimalCheck[0] + '.' + decimalCheck[1];
+                        if (!angular.isUndefined(negativeCheck[1]) && negativeCheck[0].length > 0) {
+                            clean = negativeCheck[0] + '' + negativeCheck[1];
+                        }
+                    } else if (!angular.isUndefined(scope.preDecimalMaxLength)) {
+                        clean = clean.slice(0, scope.preDecimalMaxLength);
+                    }
+
+                    if (val !== clean) {
+                        ngModelCtrl.$setViewValue(clean);
+                        ngModelCtrl.$render();
+                    }
+
+                    return clean;
+                });
+
+                element.bind('keypress', function (event) {
+                    if (event.keyCode === 32) {
+                        event.preventDefault();
+                    }
+                });
+            }
+        };
+
+});
