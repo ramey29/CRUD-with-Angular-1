@@ -81,7 +81,7 @@ myApp.controller('joinCrew',['$scope', 'joinCrewService', function($scope, joinC
     $scope.user= "priya@gmail.com";
     $scope.currencyN = '';
     $scope.amount = '';
-    $scope.txn_date = '';
+    $scope.date = '';
   }
 
   function loadAllTransaction(){
