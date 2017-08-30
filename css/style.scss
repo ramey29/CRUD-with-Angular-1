@@ -82,7 +82,7 @@ a.button {
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 40%;
+  width: 60%;
   position: relative;
   transition: all 5s ease-in-out;
   h2 {
@@ -111,9 +111,9 @@ a.button {
   color: #00897B;
    }
 }
- input, select{width:61%;height:50px;line-height:50px;border:2px solid #00897B;padding:0 10px;}
+ input, select{width:68%;height:50px;line-height:50px;border:2px solid #00897B;padding:0 10px;}
  .dateInput{width:81%;}
- select{width:100px;}
+ select{width:100px;padding:0}
  .label{font-size:14px;line-height:50px;width:80px;display:inline-block}
  datepicker, .datepicker{float:none;}
 .btnDv{text-align:right;}
@@ -160,8 +160,8 @@ a.button {
     border-bottom: 0;
   }
   }
-}
 
+}
 
   @media screen and (max-width: 700px){
   .box{
@@ -170,6 +170,11 @@ a.button {
   .popup{
     width: 70%;
   }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 400px)  {
+  input, select{width:60%;}
+ .dateInput{width:78%;} 
 }
 
 

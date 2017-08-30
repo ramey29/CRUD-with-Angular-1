@@ -74,7 +74,7 @@ body {
     padding: 20px;
     background: #fff;
     border-radius: 5px;
-    width: 40%;
+    width: 60%;
     position: relative;
     transition: all 5s ease-in-out; }
     body .popup h2 {
@@ -107,7 +107,7 @@ body {
       body .popup .close:hover {
         color: #00897B; }
     body .popup input, body .popup select {
-      width: 61%;
+      width: 68%;
       height: 50px;
       line-height: 50px;
       border: 2px solid #00897B;
@@ -115,7 +115,8 @@ body {
     body .popup .dateInput {
       width: 81%; }
     body .popup select {
-      width: 100px; }
+      width: 100px;
+      padding: 0; }
     body .popup .label {
       font-size: 14px;
       line-height: 50px;
@@ -167,3 +168,9 @@ body {
     width: 70%; }
   .popup {
     width: 70%; } }
+
+@media screen and (max-width: 1000px) and (min-width: 400px) {
+  input, select {
+    width: 60%; }
+  .dateInput {
+    width: 78%; } }

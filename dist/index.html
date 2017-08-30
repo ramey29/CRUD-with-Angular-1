@@ -7,10 +7,12 @@
         
         <link rel="stylesheet" href="css/style.min.css">
     </head>
-    <body ng-app="angAppX">
+    <body ng-app="angAppX" >
+        <div ng-controller="joinCrew">
         <div class="mainContent clearfix">
-           <div ng-controller="joinCrew">
-                <a class="button btn1" href="#popup1">Add New Transaction</a>
+            <div>{{globalErrorMessage}}</div>
+           <div >
+                <a class="button btn1" data-ng-click="addModel()">Add New Transaction</a>
                     <table >
                         <caption>All Transactions</caption>
                         
@@ -21,7 +23,6 @@
                                 <th style="text-align:right">Amount</th>
                                 <th >Date</th>
                                 <th>Actions</th>
-                                
                             </tr>
                         </thead>
                        <tbody>
@@ -31,8 +32,9 @@
                                 <td style="text-align:right">{{ list.currency }} {{ list.amount | number : 2 }}</td>
                                 <td>{{ list.txn_date | date : YYYY-MM-DD}}</td>
                                 <td>
-                                    <a href="#popup1" class="button" data-ng-click="oneTransaction(list.id, list.user)">Edit</a>
-                                    <a  class="button"data-ng-click="deleteTransaction(list.id, list.user)">Delete</a>
+                                    <a class="button" data-ng-click="oneTransaction(list.id, list.user);">View Info</a>
+                                    <a class="button" data-ng-click="editTransaction(list.id, list.user)">Edit</a>
+                                    <a class="button" data-ng-click="deleteTransaction(list.id, list.user)">Delete</a>
                                 </td>
                             </tr>
                        </tbody>    
@@ -42,17 +44,34 @@
         
                
         </div>
-           <div id="popup1" class="overlay">
+           <div id="popup1" class="overlay" ng-if="modalOpen">
             <div class="popup">
-                <h2 ng-if="">Edit Transaction {{}}</h2>
-                <h2 ng-if="">Add Transaction</h2>
-                <a class="close" href="#">&times;</a>
-                <div class="content">
-                   <div><span>User</span><input type="email" ng-model="user"/></div>
-                   <div><span>Amount</span><input type="number" ng-model="amount"/></div>
-                   <div><span>Date</span>
-                    <datepicker> <input ng-model="date" type="text"/></datepicker>
+                <h2 ng-if="openEdit">Edit Transaction {{id}}</h2>
+                <h2 ng-if="openAdd">Add Transaction</h2>
+                <h2 ng-if="openOne">View Transaction {{showInfo.id}}</h2>
+                <a class="close" data-ng-click="modalClose()">&times;</a>
+                <div class="content" ng-if="!openOne && (openEdit || openAdd) ">
+                   <div class="contentMain"><span class="label">User </span> {{ user }}</div>
+                   <div class="contentMain"><span class="label">Date</span>
+                    <datepicker date-format="y-MM-dd"> <input ng-model="date" class="dateInput" type="text"/></datepicker>
+                    <br><span class="errorMsg">{{errorMessage.txn_date}}</span>
                    </div>
+                   <div class="contentMain"><span class="label">Amount</span>
+                    <select ng-model="currencyN" ng-options="x for x in currency"></select>                       
+                    <input type="text" ng-model="amount"/>
+                    <br><span class="errorMsg">{{errorMessage.currency}}</span><span class="errorMsg">{{errorMessage.amount}}</span>
+                   </div>
+                   <div class="btnDv">
+                       <a class="button" ng-if="openEdit" data-ng-click="updateTransaction(id, user, amount, currencyN, date);">Update</a>
+                       <a class="button" ng-if="openAdd" data-ng-click="createTransaction(user, amount, currencyN, date);">Save</a>
+                       <a class="button" data-ng-click="modalClose()">Cancel</a>
+                   </div>
+                </div>
+                <div class="content" ng-if="openOne">
+                   <div class="contentMain"><span class="label">User</span><span>{{showInfo.user}}</span></div>
+                   <div class="contentMain"><span class="label">Date</span><span>{{showInfo.txn_date | date : YYYY-MM-DD}}</span></div>
+                   <div class="contentMain"><span class="label">Amount</span><span>{{showInfo.currency }} </span><span> {{showInfo.amount | number : 2 }}</span></div>
+                   
                 </div>
             </div>
         </div> 
