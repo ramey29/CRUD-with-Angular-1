@@ -48,22 +48,7 @@ th {
   text-transform: uppercase;
 }
 } 
-a.button {
-  font-size: 1em;
-  padding: 6px 10px;
-  border: 2px solid #00796B;
-  border-radius: 20px/50px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease-out;
-  color:#000;
-  display: inline-block;
-  &.btn1{position:absolute;right:100px;top:5px;}
-  &:hover{
-  background: #00796B;
-    color: #fff;
-        }
-}
+
  .overlay  {
   position: fixed;
   top: 0;
@@ -111,13 +96,30 @@ a.button {
   color: #00897B;
    }
 }
- input, select{width:68%;height:50px;line-height:50px;border:2px solid #00897B;padding:0 10px;}
+ input[type="text"], select{width:68%;height:50px;line-height:50px;border:2px solid #00897B;padding:0 10px;}
  .dateInput{width:81%;}
  select{width:100px;padding:0}
  .label{font-size:14px;line-height:50px;width:80px;display:inline-block}
  datepicker, .datepicker{float:none;}
 .btnDv{text-align:right;}
 .errorMsg{color:#E53935;display:inline-block;margin:0 5px;}
+}
+a.button, input.button {
+  font-size: 1em;
+  padding: 6px 10px;
+  border: 2px solid #00796B;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  background:#fff;
+  transition: all 0.3s ease-out;
+  color:#000;
+  display: inline-block;
+  &.btn1{position:absolute;right:100px;top:5px;}
+  &:hover{
+  background: #00796B;
+    color: #fff;
+        }
 }
 }
 

@@ -56,21 +56,43 @@
                 <h2 ng-if="openOne">View Transaction {{showInfo.id}}</h2>
                 <a class="close" data-ng-click="modalClose()">&times;</a>
                 <div class="content" ng-if="!openOne && (openEdit || openAdd) ">
-                   <div class="contentMain"><span class="label">User </span> {{ user }}</div>
-                   <div class="contentMain"><span class="label">Date</span>
-                    <datepicker date-format="y-MM-dd"> <input ng-model="date" class="dateInput" type="text"/></datepicker>
-                    <br><span class="errorMsg">{{errorMessage.txn_date}}</span>
-                   </div>
-                   <div class="contentMain"><span class="label">Amount</span>
-                    <select ng-model="currencyN" ng-options="x for x in currency"></select>                       
-                    <input type="text" ng-model="amount" valid-number/>
-                    <br><span class="errorMsg">{{errorMessage.currency}}</span><span class="errorMsg">{{errorMessage.amount}}</span>
-                   </div>
-                   <div class="btnDv">
-                       <a class="button" ng-if="openEdit" data-ng-click="updateTransaction(id, user, amount, currencyN, date);">Update</a>
-                       <a class="button" ng-if="openAdd" data-ng-click="createTransaction(user, amount, currencyN, date);">Save</a>
-                       <a class="button" data-ng-click="modalClose()">Cancel</a>
-                   </div>
+                    <form method="POST" id="edit_form" action="{{ actionUrl }}" ng-if="openEdit">
+                        <input type="hidden" name="user" ng-model="user" />
+                        <input type="hidden" name="id" ng-model="id" />
+                        <div class="contentMain"><span class="label">User </span> {{ user }}</div>
+                        <div class="contentMain"><span class="label">Date</span>
+                            <datepicker date-format="y-MM-dd"> <input ng-model="date" name="txn_date" class="dateInput" type="text" value=""/></datepicker>
+                            <br><span class="errorMsg">{{errorMessage.txn_date}}</span>
+                        </div>
+                        <div class="contentMain"><span class="label">Amount</span>
+                             <select ng-model="currencyN" name="currency" ng-options="x for x in currency track by x"></select> 
+                            <!-- <input type="text" name="currency" value="" ng-model="currency" />                        -->
+                            <input type="text" name="amount" value="" ng-model="amount" valid-number/>
+                            <br><span class="errorMsg">{{errorMessage.currency}}</span><span class="errorMsg">{{errorMessage.amount}}</span>
+                        </div>
+                        <div class="btnDv">
+                            <input type="submit" class="button" ng-if="openEdit" />
+                            <a class="button" data-ng-click="modalClose()">Cancel</a>
+                        </div>
+                    </form>
+
+                    <form method="POST" action="https://jointhecrew.in/api/txns/priya@gmail.com" ng-if="openAdd">
+                        <div class="contentMain"><span class="label">User </span> {{ user }}</div>
+                        <div class="contentMain"><span class="label">Date</span>
+                            <datepicker date-format="y-MM-dd"> <input name="txn_date" value="" ng-model="date" class="dateInput" type="text"/></datepicker>
+                            <br><span class="errorMsg">{{errorMessage.txn_date}}</span>
+                        </div>
+                        <div class="contentMain"><span class="label">Amount</span>
+                            <select ng-model="currencyN" name="currency" value="" ng-options="x for x in currency track by x"></select>                       
+                            <input type="text" name="amount" value="" ng-model="amount" valid-number/>
+                            <br><span class="errorMsg">{{errorMessage.currency}}</span><span class="errorMsg">{{errorMessage.amount}}</span>
+                        </div>
+                        <div class="btnDv">
+                            <input type="submit" class="button" ng-if="openAdd" />
+                            <a class="button" data-ng-click="modalClose()">Cancel</a>
+                        </div>
+                    </form>
+
                 </div>
                 <div class="content" ng-if="openOne">
                    <div class="contentMain"><span class="label">User</span><span>{{showInfo.user}}</span></div>

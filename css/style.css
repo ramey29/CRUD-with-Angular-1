@@ -42,23 +42,6 @@ body {
       font-size: .85em;
       letter-spacing: .1em;
       text-transform: uppercase; }
-  body a.button {
-    font-size: 1em;
-    padding: 6px 10px;
-    border: 2px solid #00796B;
-    border-radius: 20px/50px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease-out;
-    color: #000;
-    display: inline-block; }
-    body a.button.btn1 {
-      position: absolute;
-      right: 100px;
-      top: 5px; }
-    body a.button:hover {
-      background: #00796B;
-      color: #fff; }
   body .overlay {
     position: fixed;
     top: 0;
@@ -106,7 +89,7 @@ body {
       cursor: pointer; }
       body .popup .close:hover {
         color: #00897B; }
-    body .popup input, body .popup select {
+    body .popup input[type="text"], body .popup select {
       width: 68%;
       height: 50px;
       line-height: 50px;
@@ -130,6 +113,24 @@ body {
       color: #E53935;
       display: inline-block;
       margin: 0 5px; }
+  body a.button, body input.button {
+    font-size: 1em;
+    padding: 6px 10px;
+    border: 2px solid #00796B;
+    border-radius: 20px/50px;
+    text-decoration: none;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.3s ease-out;
+    color: #000;
+    display: inline-block; }
+    body a.button.btn1, body input.button.btn1 {
+      position: absolute;
+      right: 100px;
+      top: 5px; }
+    body a.button:hover, body input.button:hover {
+      background: #00796B;
+      color: #fff; }
 
 @media screen and (max-width: 600px) {
   table {
